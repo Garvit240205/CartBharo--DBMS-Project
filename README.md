@@ -84,11 +84,6 @@ To run this project locally, please follow these steps:
     ```sql
     -- Inside the MySQL client
     SOURCE path/to/your/db_setup.sql;
-    ```
-    - **Alternatively**, you can use the provided Python script to automate this step:
-    ```bash
-    python init_db.py
-    ```
 
 5.  **Configure the Application:**
     - Open `app.py` and update the MySQL `password` in the `get_db_connection` function to match your root password.
