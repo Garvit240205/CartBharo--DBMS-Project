@@ -1,4 +1,4 @@
-![Screenshot 2025-06-22 161144](https://github.com/user-attachments/assets/5a05c2cd-dd22-4ca7-ad3b-40efbbfd8349)# CartBharo - Full-Stack E-commerce Web Application
+# CartBharo - Full-Stack E-commerce Web Application
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-2.x-black?logo=flask)
