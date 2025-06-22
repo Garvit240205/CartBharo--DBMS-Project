@@ -1,112 +1,108 @@
-# CartBharo--DBMS-Project
+# CartBharo - Full-Stack E-commerce Web Application
 
-## Overview
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-2.x-black?logo=flask)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql)
+![HTML5](https://img.shields.io/badge/HTML-5-red?logo=html5)
+![CSS3](https://img.shields.io/badge/CSS-3-blue?logo=css3)
 
-CartBharo is a comprehensive e-commerce database system designed to manage various aspects of an online shopping platform. It includes tables and relationships for managing users, products, suppliers, vendors, stores, orders, payments, delivery agents, and feedback. This database schema ensures efficient storage, retrieval, and manipulation of data related to e-commerce operations.
+A comprehensive e-commerce web application built from the ground up to demonstrate core software engineering principles, with a strong focus on backend development and robust database design.
+
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technical Showcase](#technical-showcase)
+- [Database Schema](#database-schema)
+- [Setup and Installation](#setup-and-installation)
+- [Usage](#usage)
+
+## Project Overview
+
+CartBharo is a full-stack web application that simulates a modern online shopping platform. It features distinct user roles (Admin and Customer), each with a dedicated interface and functionalities. The project's primary goal was to design and implement a normalized, relational database and build a secure and efficient backend to interact with it.
+
+The backend is powered by Python and the Flask micro-framework, while the database is managed with MySQL. The frontend is rendered using server-side templates with HTML, CSS, and Bootstrap for a clean and responsive user experience.
+
+## Features
+
+- **Dual Role System:**
+  - **Admin Portal:** Secure login for administrators to manage the platform. Admins can view analytics like total orders, list all products, and add promotional offers.
+  - **Customer Portal:** Customers can sign up, log in, browse products, add items to their shopping cart, and place orders.
+
+- **Complete E-commerce Flow:**
+  - User registration and authentication.
+  - Product catalog display.
+  - Shopping cart functionality (add, remove, view).
+  - A multi-step checkout process that creates orders, generates payments, and updates inventory.
+
+- **Data-Driven Analytics:**
+  - An "Analytics" page demonstrating complex, pre-written SQL queries to derive business insights, such as identifying top-paying customers and top-rated delivery agents.
+
+- **Database Integrity:**
+  - A "Triggers" page showcasing how database triggers automatically enforce business rules (e.g., minimum product price, valid user ratings) before data is even written to the tables.
+
+## Technical Showcase
+
+- **Database Design:** The MySQL database was designed from scratch, focusing on normalization (up to 3NF) to ensure data integrity and reduce redundancy. The schema includes over 10 tables with primary keys, foreign keys, and complex relationships.
+- **Backend Development:** A RESTful-style backend was created with Flask to handle all business logic, including routing, request handling, session management, and user authentication.
+- **SQL Proficiency:** Instead of relying solely on an ORM, raw SQL queries were written using the `mysql-connector-python` library.
+- **Data Integrity and Business Rules:** Implemented database triggers to enforce rules at the database level, providing a robust layer of data validation.
+- **Full-Stack Integration:** Seamlessly connected the Python backend to a dynamic HTML/CSS frontend, creating a complete and functional user experience.
 
 ## Database Schema
 
-### Tables and Relationships
+The database is the heart of this project.
 
-1. **phone_number**:
-   - Stores phone numbers for users, suppliers, vendors, stores, and delivery agents.
+- **Core Entities:** `user`, `admin`, `product`, `supplier`.
+- **Transactional Entities:** `cart`, `orders`, `payment`.
+- **Feedback & Support:** `order_feedback`, `agent_feedback`, `delivery_agent`.
+- **Normalized Data:** `email` and `phone_number` tables to prevent data duplication.
 
-2. **email**:
-   - Stores email addresses for users, suppliers, vendors, stores, and delivery agents.
+## Setup and Installation
 
-3. **admin**:
-   - Stores information about administrators.
+To run this project locally, please follow these steps:
 
-4. **supplier**:
-   - Stores information about suppliers including their phone numbers and email addresses.
+1.  **Prerequisites:**
+    - Python 3.9+
+    - MySQL Server 8.0+
+    - Git
 
-5. **vendor**:
-   - Stores information about vendors linked to suppliers, including their phone numbers and email addresses.
+2.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/Garvit240205/CartBharo--DBMS-Project.git
+    cd CartBharo--DBMS-Project
+    ```
 
-6. **store**:
-   - Stores information about physical stores including their location, vendors, suppliers, phone numbers, and email addresses.
+3.  **Install Python Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-7. **product**:
-   - Stores information about products including their price, quantity, and associated suppliers.
+4.  **Setup the Database:**
+    - Log in to your MySQL server as the `root` user.
+    - Open the `db_setup.sql` file and ensure the credentials match your setup if needed.
+    - Run the entire script to create the `CARTBHARO` database, all tables, and insert sample data.
+    ```sql
+    -- Inside the MySQL client
+    SOURCE path/to/your/db_setup.sql;
+    ```
+    - **Alternatively**, you can use the provided Python script to automate this step:
+    ```bash
+    python init_db.py
+    ```
 
-8. **user**:
-   - Stores information about users including their personal details, contact information, and credentials.
+5.  **Configure the Application:**
+    - Open `app.py` and update the MySQL `password` in the `get_db_connection` function to match your root password.
 
-9. **cart**:
-   - Stores information about user carts, linking users to products they are interested in purchasing.
+6.  **Run the Flask Application:**
+    ```bash
+    flask run --port=5001
+    ```
+    The application will be available at `http://127.0.0.1:5001`.
 
-10. **orders**:
-    - Stores information about orders placed by users including the order date, products ordered, and quantities.
+## Usage
 
-11. **payment**:
-    - Stores information about payments made by users for their orders.
-
-12. **delivery_agent**:
-    - Stores information about delivery agents responsible for delivering orders including their phone numbers and email addresses.
-
-13. **offers**:
-    - Stores information about offers available to users, including discounts and last login dates.
-
-14. **order_feedback**:
-    - Stores feedback provided by users about their orders, including ratings and comments.
-
-15. **agent_feedback**:
-    - Stores feedback provided by users about delivery agents, including ratings and comments.
-
-## How to Setup
-
-### Prerequisites
-
-1. **MySQL Server**: Ensure you have MySQL Server installed. You can download it from the official [MySQL website](https://dev.mysql.com/downloads/mysql/).
-
-2. **MySQL Connector**: Install the MySQL Connector for Python to connect your Python application to the MySQL database.
-
-   ```bash
-   pip install mysql-connector-python
-   ```
-
-### Database Setup
-
-1. **Create Database and Tables**:
-   - Use the provided SQL script to create the `CARTBHARO` database and all the required tables. Execute the script using a MySQL client like MySQL Workbench or the command line.
-
-   ```sql
-   DROP DATABASE IF EXISTS CARTBHARO;
-
-   CREATE DATABASE IF NOT EXISTS CARTBHARO;
-   USE CARTBHARO;
-
-   -- (Include the entire SQL script provided in the previous message)
-   ```
-
-2. **Insert Initial Data**:
-   - The SQL script also includes `INSERT` statements to populate the tables with initial data.
-
-### Connecting to the Database
-
-- Use the `mysql.connector` library in your Python application to connect to the MySQL database.
-
-   ```python
-   import mysql.connector
-
-   db = mysql.connector.connect(
-       host="localhost",
-       user="yourusername",
-       password="yourpassword",
-       database="CARTBHARO"
-   )
-
-   cursor = db.cursor()
-   ```
-
-## Summary of Operations
-
-- **User Management**: Add, update, and retrieve user information.
-- **Product Management**: Manage product details, prices, and quantities.
-- **Order Processing**: Handle orders placed by users, including payment and delivery.
-- **Feedback System**: Collect and manage feedback from users about orders and delivery agents.
-- **Offers and Discounts**: Manage and apply offers and discounts for users.
-- **Supplier and Vendor Management**: Manage relationships and details of suppliers and vendors.
-- **Store Management**: Maintain details of physical stores and their associations with vendors and suppliers.
-
-This project aims to provide a robust backend system for managing an e-commerce platform, ensuring efficient and organized data handling.
+- **Admin Login:**
+  - **Email:** `garvit.kochar@example.com`
+  - **Password:** `garvit@1234`
+- **Customer Login:**
+  - You can sign up as a new user or use one of the sample users from `db_setup.sql` (e.g., `alice@example.com` / `password123`).
