@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block title %}Triggers Demonstration{% endblock %}
+{% block content %}
+<h2 class="mb-4">Database Triggers Demonstration</h2>
+<p>This section demonstrates how database triggers automatically enforce business rules. Try inserting data that violates a rule to see the trigger in action.</p>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="{{ url_for('triggers') }}" method="post">
+            <div class="mb-3">
+                <p><strong>Select a trigger to test:</strong></p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="trigger_option" id="invalid_rating" value="invalid_rating" required>
+                    <label class="form-check-label" for="invalid_rating">Feedback Rating Trigger (valid: 1-5)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="trigger_option" id="low_payment" value="low_payment">
+                    <label class="form-check-label" for="low_payment">Minimum Payment Trigger (valid: >= $5)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="trigger_option" id="low_price" value="low_price">
+                    <label class="form-check-label" for="low_price">Minimum Product Price Trigger (valid: >= $5)</label>
+                </div>
+            </div>
+
+            <!-- Form for Feedback Trigger -->
+            <div id="invalid_rating-form" class="trigger-form mt-3 p-3 border rounded bg-light" style="display:none;">
+                <h5>Insert New Feedback (Try a rating of 0 or 6)</h5>
+                <div class="row g-2">
+                    <div class="col-md-4"><input type="number" name="userID" class="form-control" placeholder="User ID (e.g., 1)"></div>
+                    <div class="col-md-4"><input type="number" name="orderID" class="form-control" placeholder="Order ID (e.g., 1)"></div>
+                    <div class="col-md-4"><input type="number" name="rating" class="form-control" placeholder="Rating (e.g., 6)"></div>
+                    <div class="col-12"><input type="text" name="feedback_text" class="form-control" placeholder="Feedback Text"></div>
+                </div>
+            </div>
+
+            <!-- Form for Payment Trigger -->
+            <div id="low_payment-form" class="trigger-form mt-3 p-3 border rounded bg-light" style="display:none;">
+                <h5>Insert New Payment (Try an amount of 2)</h5>
+                <div class="row g-2">
+                    <div class="col-md-4"><input type="number" name="userID" class="form-control" placeholder="User ID (e.g., 2)"></div>
+                    <div class="col-md-4"><input type="number" name="orderID" class="form-control" placeholder="Order ID (e.g., 2)"></div>
+                    <div class="col-md-4"><input type="text" name="amount" class="form-control" placeholder="Amount (e.g., 2.50)"></div>
+                </div>
+            </div>
+
+            <!-- Form for Product Price Trigger -->
+            <div id="low_price-form" class="trigger-form mt-3 p-3 border rounded bg-light" style="display:none;">
+                <h5>Insert New Product (Try a price of 3)</h5>
+                <div class="row g-2">
+                    <div class="col-md-3"><input type="number" name="supplierID" class="form-control" placeholder="Supplier ID (e.g., 1)"></div>
+                    <div class="col-md-3"><input type="text" name="product_price" class="form-control" placeholder="Price (e.g., 3.00)"></div>
+                    <div class="col-md-3"><input type="text" name="product_name" class="form-control" placeholder="Product Name"></div>
+                    <div class="col-md-3"><input type="number" name="quantity_remaining" class="form-control" placeholder="Stock Quantity"></div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-warning mt-3"><i class="bi bi-lightning-charge"></i> Activate Trigger</button>
+        </form>
+    </div>
+</div>
+
+{% if title %}
+<div class="card">
+    <div class="card-header">Result: {{ title }}</div>
+    <div class="card-body">
+        {% if results %}
+        <p><em>Notice how the trigger corrected the invalid data you tried to insert.</em></p>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        {% for header in headers %}
+                            <th>{{ header }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr class="table-info">
+                        {% for key in row %}
+                            <td>{{ row[key] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p class="text-muted">No results to display.</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

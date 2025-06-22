@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block title %}Customer Dashboard{% endblock %}
+{% block content %}
+<h2 class="mb-4">Welcome, {{ session.name }}!</h2>
+<div class="row">
+    <!-- Products Column -->
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-box-seam"></i> Available Products
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td>{{ product.product_name }}</td>
+                                <td>${{ "%.2f"|format(product.product_price) }}</td>
+                                <td>{{ product.quantity_remaining }}</td>
+                                <td>
+                                    <form action="{{ url_for('add_to_cart') }}" method="post" class="d-inline">
+                                        <input type="hidden" name="productID" value="{{ product.productID }}">
+                                        <button type="submit" class="btn btn-sm btn-success" title="Add to Cart">
+                                            <i class="bi bi-cart-plus"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Column -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-cart3"></i> Your Shopping Cart
+            </div>
+            <div class="card-body">
+                {% if cart_items %}
+                <ul class="list-group list-group-flush">
+                    {% set total = namespace(value=0) %}
+                    {% for item in cart_items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            {{ item.product_name }} <br>
+                            <small class="text-muted">Qty: {{ item.cart_size }} @ ${{ "%.2f"|format(item.product_price) }}</small>
+                        </div>
+                        <form action="{{ url_for('remove_from_cart') }}" method="post" class="d-inline">
+                            <input type="hidden" name="productID" value="{{ item.productID }}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Remove Item"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </li>
+                    {% set total.value = total.value + (item.cart_size * item.product_price) %}
+                    {% endfor %}
+                </ul>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                    <strong>Total:</strong>
+                    <strong>${{ "%.2f"|format(total.value) }}</strong>
+                </div>
+                <a href="{{ url_for('checkout') }}" class="btn btn-primary w-100 mt-3">
+                    <i class="bi bi-credit-card"></i> Proceed to Checkout
+                </a>
+                {% else %}
+                <p class="text-center text-muted">Your cart is empty.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

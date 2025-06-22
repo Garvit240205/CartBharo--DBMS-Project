@@ -1,0 +1,27 @@
+body {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #f8f9fa; /* Fallback color */
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.content-wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.login-form, .signup-form {
+    max-width: 400px;
+    margin: auto;
+}
+
+.table-responsive {
+    max-height: 400px;
+    overflow-y: auto;
+}

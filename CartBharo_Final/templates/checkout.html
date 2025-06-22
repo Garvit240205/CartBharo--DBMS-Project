@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h2 class="mb-4">Order Summary</h2>
+<p>Please review your order before confirming.</p>
+
+<div class="card">
+    <div class="card-header">
+        Items in Your Order
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {% for item in cart_items %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ item.product_name }}</strong><br>
+                    <small class="text-muted">Quantity: {{ item.cart_size }}</small>
+                </div>
+                <span>${{ "%.2f"|format(item.cart_size * item.product_price) }}</span>
+            </li>
+            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                <strong class="fs-5">Total</strong>
+                <strong class="fs-5">${{ "%.2f"|format(total_price) }}</strong>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="mt-4 text-end">
+    <!-- This form will submit the request to place the order -->
+    <form action="{{ url_for('place_order') }}" method="post">
+        <a href="{{ url_for('customer_dashboard') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="bi bi-bag-check-fill"></i> Place Order
+        </button>
+    </form>
+</div>
+{% endblock %}
