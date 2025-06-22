@@ -1,4 +1,4 @@
-# CartBharo - Full-Stack E-commerce Web Application
+![Screenshot 2025-06-22 161144](https://github.com/user-attachments/assets/5a05c2cd-dd22-4ca7-ad3b-40efbbfd8349)# CartBharo - Full-Stack E-commerce Web Application
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-2.x-black?logo=flask)
@@ -47,6 +47,16 @@ The backend is powered by Python and the Flask micro-framework, while the databa
 - **SQL Proficiency:** Instead of relying solely on an ORM, raw SQL queries were written using the `mysql-connector-python` library.
 - **Data Integrity and Business Rules:** Implemented database triggers to enforce rules at the database level, providing a robust layer of data validation.
 - **Full-Stack Integration:** Seamlessly connected the Python backend to a dynamic HTML/CSS frontend, creating a complete and functional user experience.
+
+![Screenshot 2025-06-22 160710](https://github.com/user-attachments/assets/66191bc8-4ad6-4b3c-85ef-80cab62c4fef)
+![Screenshot 2025-06-22 160727](https://github.com/user-attachments/assets/923212fd-259c-455a-a6fe-da7902c69a73)
+![Screenshot 2025-06-22 160740](https://github.com/user-attachments/assets/c55340f3-5576-48b9-b4c9-c7cf6bee64d0)
+![Screenshot 2025-06-22 160800](https://github.com/user-attachments/assets/163eeacb-01f0-4dd7-b86e-8149479fa15a)
+![Screenshot 2025-06-22 160813](https://github.com/user-attachments/assets/1af6c321-bff1-4257-bb85-81c676d04330)
+![Screenshot 2025-06-22 160831](https://github.com/user-attachments/assets/3c94db73-0ee4-439b-8800-14c8fcd5ca70)
+![Screenshot 2025-06-22 160843](https://github.com/user-attachments/assets/819e16c4-6764-4482-b5d8-4c3b482ec99c)
+![Screenshot 2025-06-22 160906](https://github.com/user-attachments/assets/1f8c7be9-c924-4022-8803-638651b82443)
+![Screenshot 2025-06-22 161144](https://github.com/user-attachments/assets/9cf77b08-8000-4036-9084-47a140107a51)
 
 ## Database Schema
 
