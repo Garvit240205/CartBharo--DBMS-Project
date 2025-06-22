@@ -60,8 +60,6 @@ The backend is powered by Python and the Flask micro-framework, while the databa
 
 ## Database Schema
 
-The database is the heart of this project.
-
 - **Core Entities:** `user`, `admin`, `product`, `supplier`.
 - **Transactional Entities:** `cart`, `orders`, `payment`.
 - **Feedback & Support:** `order_feedback`, `agent_feedback`, `delivery_agent`.
